@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-
+	scale=1.0,user-scalable=no"/>
+	<meta name="format-detection" content="telephone=no,email=no"/>
+	<style>
+	html,body{width: 100%;height: 100%}
+	*{margin: 0;padding: 0}
+			#box{width: 100%;height: 100%;overflow: hidden;}
+			#one{width: 100%;height: 100%;background: #ccc;}
+			#two{width: 100%;height: 100%;background: #000;}
+			#three{width: 100%;height: 100%;background: green;}
+			#one{-webkit-transform:translateY(0%);}
+			#two{-webkit-transform:translateY(-100%);}
+			#three{-webkit-transform:translateY(-200%);}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="one"></div>
+		<div id="two"></div>
+		<div id="three"></div>
+	</div>
+	<script src="js/zepto.js"></script>
+	<script src="js/touch.js"></script>
+	<script src="js/fx.js"></script>
+	
+	
+	<script>
+	var y,
+		endy,
+		num,
+		count=0;
+		$(document).on("touchstart",function(e){
+			var target=e.touches[0];
+				y=target.pageY;
+		}).on("touchmove",function(e){
+			var target=e.touches[0];
+				endy=target.pageY;
+		}).on("touchend",function(){
+			num=parseInt(endy-y)
+			if(num>20){
+				count++
+				if(count==1){
+					$("#three").animate({
+						translateY:"200%"
+						},500,"ease-out")
+					}else if(count==2){
+						$("#two").animate({
+							translateY:"100%"
+						},500,"ease-out")
+					}else if(count==3){
+						$("#one").animate({
+							translateY:"0%"
+						},500,"ease-out")
+					}	
+			}else if(num<-20){
+				count--
+				switch(count){
+					case 1:
+					$("#three").animate({
+						translateY:"-200%"
+						},500,"ease-out")
+				}
+				
+
+			}
+		})
+			
+
+	</script>
+</body>
+</html>
